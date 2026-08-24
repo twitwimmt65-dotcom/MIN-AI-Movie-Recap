@@ -3,111 +3,101 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>MIN AI Movie Recap</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#0b0d10;
+  color:white;
+  font-family:Arial,sans-serif
 }
 
-body {
-  margin: 0;
-  background: #0b0d10;
-  color: white;
-  font-family: Arial, sans-serif;
+.container{
+  max-width:650px;
+  margin:auto;
+  padding:35px 18px
 }
 
-.container {
-  max-width: 650px;
-  margin: auto;
-  padding: 35px 18px;
+.logo{
+  text-align:center;
+  font-size:44px;
+  font-weight:800;
+  letter-spacing:2px
 }
 
-.logo {
-  text-align: center;
-  font-size: 44px;
-  font-weight: 800;
-  letter-spacing: 2px;
+.subtitle{
+  text-align:center;
+  color:#999;
+  margin:8px 0 30px
 }
 
-.subtitle {
-  text-align: center;
-  color: #999;
-  margin-top: 8px;
-  margin-bottom: 30px;
+.card{
+  background:#171a20;
+  border-radius:20px;
+  padding:24px;
+  margin-bottom:20px
 }
 
-.card {
-  background: #171a20;
-  border-radius: 20px;
-  padding: 24px;
-  margin-bottom: 20px;
+h2{
+  margin-top:0
 }
 
-h2 {
-  margin-top: 0;
+textarea{
+  width:100%;
+  min-height:180px;
+  padding:15px;
+  border-radius:12px;
+  border:1px solid #333;
+  background:#0d0f13;
+  color:white;
+  font-size:15px;
+  resize:vertical
 }
 
-.upload {
-  width: 100%;
-  padding: 18px;
-  border: 1px dashed #666;
-  border-radius: 12px;
-  color: white;
-  margin: 15px 0;
+select{
+  width:100%;
+  padding:14px;
+  margin-top:8px;
+  border-radius:10px;
+  border:none
 }
 
-video {
-  width: 100%;
-  border-radius: 14px;
-  margin-top: 15px;
-  display: none;
+label{
+  display:block;
+  margin-top:18px;
+  margin-bottom:8px
 }
 
-.info {
-  color: #aaa;
-  font-size: 14px;
-  line-height: 1.7;
+button{
+  width:100%;
+  padding:16px;
+  margin-top:20px;
+  border:none;
+  border-radius:12px;
+  background:white;
+  color:black;
+  font-size:16px;
+  font-weight:bold
 }
 
-label {
-  display: block;
-  margin-top: 18px;
-  margin-bottom: 8px;
+.output{
+  margin-top:20px;
+  padding:18px;
+  background:#0d0f13;
+  border-radius:12px;
+  line-height:1.8;
+  white-space:pre-wrap;
+  color:#ddd
 }
 
-select {
-  width: 100%;
-  padding: 14px;
-  border-radius: 10px;
-  border: none;
-  font-size: 15px;
-}
-
-button {
-  width: 100%;
-  padding: 16px;
-  margin-top: 25px;
-  border: none;
-  border-radius: 12px;
-  background: white;
-  color: black;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-#status {
-  text-align: center;
-  color: #aaa;
-  margin-top: 18px;
-}
-
-.footer {
-  text-align: center;
-  color: #666;
-  font-size: 13px;
-  margin-top: 30px;
+.footer{
+  text-align:center;
+  color:#666;
+  font-size:13px;
+  margin-top:30px
 }
 </style>
 </head>
@@ -116,96 +106,78 @@ button {
 
 <div class="container">
 
-  <div class="logo">MIN AI</div>
+<div class="logo">MIN AI</div>
 
-  <div class="subtitle">
-    Movie Recap Studio
-  </div>
+<div class="subtitle">
+Movie Recap Studio
+</div>
 
-  <div class="card">
+<div class="card">
 
-    <h2>🎬 Movie Recap</h2>
+<h2>📝 Movie Story</h2>
 
-    <input
-      id="movieFile"
-      class="upload"
-      type="file"
-      accept="video/*"
-    >
+<textarea
+id="story"
+placeholder="ဒီနေရာမှာ Movie ဇာတ်လမ်း / Transcript ကို ထည့်ပါ...">
+</textarea>
 
-    <video id="videoPreview" controls></video>
+<label>Language</label>
 
-    <div id="fileInfo" class="info"></div>
+<select id="language">
+<option>Myanmar 🇲🇲</option>
+<option>English 🇺🇸</option>
+</select>
 
-  </div>
+<label>Voice</label>
 
-  <div class="card">
+<select id="voice">
+<option>My Voice 🎙️</option>
+<option>AI Voice</option>
+</select>
 
-    <h2>⚙️ Recap Settings</h2>
+<button onclick="generateRecap()">
+🤖 Generate Myanmar Recap
+</button>
 
-    <label>Language</label>
+</div>
 
-    <select>
-      <option>Myanmar 🇲🇲</option>
-      <option>English 🇺🇸</option>
-    </select>
+<div class="card">
 
-    <label>Voice</label>
+<h2>🎬 Recap Result</h2>
 
-    <select>
-      <option>My Voice 🎙️</option>
-      <option>AI Voice</option>
-    </select>
+<div id="result" class="output">
+Your Myanmar movie recap will appear here.
+</div>
 
-    <button onclick="generateRecap()">
-      Generate Recap
-    </button>
+</div>
 
-    <p id="status"></p>
-
-  </div>
-
-  <div class="footer">
-    MIN AI Movie Recap © 2026
-  </div>
+<div class="footer">
+MIN AI Movie Recap © 2026
+</div>
 
 </div>
 
 <script>
 
-const movieFile = document.getElementById("movieFile");
-const videoPreview = document.getElementById("videoPreview");
-const fileInfo = document.getElementById("fileInfo");
+function generateRecap(){
 
-movieFile.addEventListener("change", function() {
+const story=document.getElementById("story").value.trim();
 
-  const file = this.files[0];
+const result=document.getElementById("result");
 
-  if (!file) return;
+if(!story){
 
-  videoPreview.src = URL.createObjectURL(file);
-  videoPreview.style.display = "block";
+result.innerText=
+"ကျေးဇူးပြုပြီး Movie ဇာတ်လမ်းကို အရင်ထည့်ပါ။";
 
-  const size = (file.size / 1024 / 1024).toFixed(2);
+return;
 
-  fileInfo.innerHTML =
-    "File: " + file.name +
-    "<br>Size: " + size + " MB";
+}
 
-});
-
-function generateRecap() {
-
-  if (!movieFile.files[0]) {
-
-    document.getElementById("status").innerText =
-      "Please upload a movie first.";
-
-    return;
-  }
-
-  document.getElementById("status").innerText =
-    "MIN AI is preparing your movie recap...";
+result.innerText=
+"MIN AI က Movie Recap Script ပြင်ဆင်နေပါတယ်...\n\n"+
+"ဒီအဆင့်မှာ AI API မချိတ်ရသေးပါဘူး။ "+
+"နောက်တစ်ဆင့်မှာ AI ကို ချိတ်ပြီး မြန်မာ Recap Script အမှန်တကယ် ထုတ်ပေးနိုင်အောင် ပြုလုပ်ပါမယ်။";
 
 }
 
